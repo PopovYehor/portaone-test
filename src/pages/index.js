@@ -3,12 +3,10 @@ import Header from "@/components/header/header"
 import styles from "./page.module.scss"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { getMax } from "@/helpers/mathFunctions/max"
-import { getMin } from "@/helpers/mathFunctions/min"
+import { getMinMax } from "@/helpers/mathFunctions/minMax"
 import { getAverageData } from "@/helpers/mathFunctions/average"
 import { getMedianOfData } from "@/helpers/mathFunctions/mediana"
-import { getSequenceOfDataMax } from "@/helpers/mathFunctions/sequences"
-import { getSequenceOfDataMin } from "@/helpers/mathFunctions/sequences"
+import { getSequenceOfData } from "@/helpers/mathFunctions/sequences"
 import Loader from "@/components/loader/loader"
 import { URL } from "@/constants/url"
 
@@ -30,7 +28,7 @@ export default function Home() {
   }
   
   const setDataItems = ()=>{
-    const data = [
+    const dataItems = [
       {name: "The maximum number in the file:", value: max},
       {name: "The minimum number in the file:", value: min},
       {name: "Arithmetic mean value:", value: average},
@@ -38,7 +36,7 @@ export default function Home() {
       {name: "The largest sequence of numbers (one after the other) that increases:", value: sequenceMax},
       {name: "The largest sequence of numbers (one after the other) that is decreasing:", value:sequenceMin}
     ]
-    setDataItem(data)
+    setDataItem(dataItems)
     if(max != 0){
       setLoad(false)
     }
@@ -49,13 +47,12 @@ export default function Home() {
   },[])
 
   useEffect(()=>{
-    getMax(data, setMax)
-    getMin(data, setMin)
+    getMinMax(data, 'max', setMax)
+    getMinMax(data, 'min',setMin)
     getAverageData(data, setAverage)
     getMedianOfData(data, setMediana)
-    getSequenceOfDataMax(data, setSequenceMax)
-    getSequenceOfDataMin(data, setSequenceMin)
-    
+    getSequenceOfData(data, 'max', setSequenceMax)
+    getSequenceOfData(data,'min', setSequenceMin)
   },[data])
 
   useEffect(()=>{
@@ -86,4 +83,3 @@ export default function Home() {
   </>
   )
 }
-
