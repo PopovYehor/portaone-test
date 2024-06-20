@@ -38,6 +38,17 @@ Your data is read from public\db.txt
 
 You can change the data in the file, or replace the file itself, the name must be there db.txt
 
+## Data format in database
+The data format should be as in the example below
+
+```bash
+1 9207923
+2 36057755
+3 31143273
+4 -3802567
+5 -30796115
+```
+
 ## URL
 
 Your URL development server is [http://localhost:3000](http://localhost:3000)
